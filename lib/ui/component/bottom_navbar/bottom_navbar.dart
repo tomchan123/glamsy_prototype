@@ -36,7 +36,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         shadows: [
           Shadow(
             color: Color.fromARGB(235, 228, 222, 255),
-            offset: Offset.fromDirection(50 * pi/180, 3),
+            offset: Offset.fromDirection(40 * pi/180, 3),
           ),
         ],
       ),
