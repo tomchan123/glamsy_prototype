@@ -7,6 +7,8 @@ import "package:flutter/widgets.dart";
 import "package:prototype/ui/component/bottom_navbar/bottom_navbar.dart";
 import "package:prototype/ui/component/custom_card/custom_card.dart";
 
+import "../../component/floating_menu/floating_menu.dart";
+
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
 
@@ -26,9 +28,21 @@ class _HomePageState extends State<HomePage> {
           style: theme.textTheme.titleMedium,
         ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          _landingArea(theme),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                _landingArea(theme),
+                Placeholder(),
+                Placeholder(),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight + Alignment(-0.1, -0.05),
+            child: FloatingMenu(),
+          ),
         ],
       ),
       bottomNavigationBar: const BottomNavbar(),
