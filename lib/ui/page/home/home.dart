@@ -46,6 +46,67 @@ class _HomePageState extends State<HomePage> {
   Widget _landingArea(
     ThemeData theme,
   ) {
+    return Container(
+      color: theme.colorScheme.background,
+      child: Column(
+        children: [
+          _locationHeader(theme),
+          _imageSlider(theme),
+          _actionTileArea(theme),
+          _portalButtonArea(theme),
+        ]
+      ),
+    );
+  }
+
+  Widget _locationHeader(
+    ThemeData theme,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          TextButton.icon(
+            onPressed: () {}, 
+            icon: Icon(
+              Icons.location_pin,
+            ),
+            label: Text(
+              "香港",
+              style: theme.textTheme.bodyMedium!.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ),
+          SizedBox(width: 8,),
+          Expanded(
+            child: Text(
+              "香港中環分店",
+              style: theme.textTheme.bodyMedium,
+            ),
+          ),
+          IconButton(
+            onPressed: () {}, 
+            icon: Icon(
+              CupertinoIcons.location_fill,
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          IconButton(
+            onPressed: () {}, 
+            icon: Icon(
+              CupertinoIcons.phone_fill,
+              color: theme.colorScheme.primary,
+            )
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _imageSlider(
+    ThemeData theme,
+  ) {
     var advertImages = [
       "assets/images/adverts/advert1.jpg",
       "assets/images/adverts/advert2.jpg",
@@ -54,109 +115,24 @@ class _HomePageState extends State<HomePage> {
       "assets/images/adverts/advert5.jpg",
     ];
 
-    return Container(
-      color: theme.colorScheme.background,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              children: [
-                TextButton.icon(
-                  onPressed: () {}, 
-                  icon: Icon(
-                    Icons.location_pin,
-                  ),
-                  label: Text(
-                    "香港",
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 8,),
-                Expanded(
-                  child: Text(
-                    "香港中環分店",
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {}, 
-                  icon: Icon(
-                    CupertinoIcons.location_fill,
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {}, 
-                  icon: Icon(
-                    CupertinoIcons.phone_fill,
-                    color: theme.colorScheme.primary,
-                  )
-                )
-              ],
-            ),
-          ),
-          CarouselSlider(
-            items: advertImages.map<Widget>((img) {
-                return CustomCard(
-                  width: 600,
-                  height: 400,
-                  margin: const EdgeInsets.symmetric(vertical: 14),
-                  child: Image.asset(
-                    img,
-                    fit: BoxFit.fill,
-                  )
-                );
-            }).toList(), 
-            options: CarouselOptions(
-              viewportFraction: 0.85,
-              aspectRatio: 16 / 8.6,
-              enlargeFactor: 0.3,
-              enlargeCenterPage: true,
+    return CarouselSlider(
+      items: advertImages.map<Widget>((img) {
+          return CustomCard(
+            width: 600,
+            height: 400,
+            margin: const EdgeInsets.symmetric(vertical: 14),
+            child: Image.asset(
+              img,
+              fit: BoxFit.fill,
             )
-          ),
-          _actionTileArea(theme),
-          _portalButtonArea(theme),
-        ]
-      ),
-    );
-  }
-
-  Widget _portalButtonArea(
-    ThemeData theme,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 12,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CircularActionButton(
-            icon: FontAwesomeIcons.crown,
-            label: "會員中心"
-          ),
-          CircularActionButton(
-            icon: FontAwesomeIcons.ticket,
-            label: "優惠券"
-          ),
-          CircularActionButton(
-            icon: FontAwesomeIcons.brush,
-            label: "量身訂做"
-          ),
-          CircularActionButton(
-            icon: FontAwesomeIcons.store,
-            label: "積分商店"
-          ),
-          CircularActionButton(
-            icon: FontAwesomeIcons.gift,
-            label: "邀請有女"
-          ),
-        ],
-      ),
+          );
+      }).toList(), 
+      options: CarouselOptions(
+        viewportFraction: 0.85,
+        aspectRatio: 16 / 8.6,
+        enlargeFactor: 0.3,
+        enlargeCenterPage: true,
+      )
     );
   }
 
@@ -206,6 +182,44 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget _portalButtonArea(
+    ThemeData theme,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 12,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CircularActionButton(
+            icon: FontAwesomeIcons.crown,
+            label: "會員中心"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.ticket,
+            label: "優惠券"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.brush,
+            label: "量身訂做"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.store,
+            label: "積分商店"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.gift,
+            label: "邀請有女"
+          ),
+        ],
+      ),
+    );
+  }
+
+
 
   Widget _largeActionTile(
     ThemeData theme,
