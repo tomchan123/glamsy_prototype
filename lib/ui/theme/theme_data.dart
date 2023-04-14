@@ -24,14 +24,22 @@ class AppTheme {
           fontWeight: FontWeight.bold,
         ),
         labelMedium: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.w500,
-        )
+        ),
+        bodySmall: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.normal,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       colorScheme: const ColorScheme.light(
         background: Colors.white,
-        shadow: Colors.black26,
-        primary: Color.fromARGB(255, 212,162,94),
+        shadow: Colors.black12,
+        primary: Color.fromARGB(255, 212, 162, 94),
         onPrimary: Colors.white,
         secondary: Color.fromARGB(255, 187, 138, 125),
       ),

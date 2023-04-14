@@ -21,12 +21,13 @@ class CustomCard extends StatelessWidget {
   bool enableShadow;
   BoxConstraints? constraints;
   BlendMode? backgroundBlendMode;
+  DecorationImage? image;
 
   CustomCard({ 
     Key? key,
     this.margin,
     this.constraints,
-    this.backgroundBlendMode,
+    this.image,
     this.width,
     this.height,
     this.enableShadow = true,
@@ -44,18 +45,19 @@ class CustomCard extends StatelessWidget {
       height: height,
       margin: margin,
       decoration: BoxDecoration(
-        backgroundBlendMode: backgroundBlendMode,
+        image: image,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: !enableShadow
           ? null
           :[
             BoxShadow(
-              offset: Offset.fromDirection(60 * pi/180, 5),
+              offset: Offset.fromDirection(60 * pi/180, 3),
               color: theme.colorScheme.shadow,
               blurRadius: 8
             ),
             BoxShadow(
-              offset: Offset.fromDirection(120 * pi/180, 5),
+              offset: Offset.fromDirection(120 * pi/180, 3),
               color: theme.colorScheme.shadow,
               blurRadius: 8
             ),
