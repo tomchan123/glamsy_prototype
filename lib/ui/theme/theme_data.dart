@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData get mainTheme {
     return ThemeData(
-      primaryColor: const Color.fromARGB(255, 0xE3, 0xB6, 0x7D),
+      primaryColor: const Color.fromARGB(255, 212,162,94),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -18,11 +18,21 @@ class AppTheme {
         titleMedium: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
+        ),
+        labelMedium: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
         )
       ),
       colorScheme: const ColorScheme.light(
         background: Colors.white,
         shadow: Colors.black26,
+        primary: const Color.fromARGB(255, 212,162,94),
+        onPrimary: Colors.white,
+      ),
+      iconTheme: IconThemeData(
+        size: 22,
+        weight: 600,
       ),
     );
   }

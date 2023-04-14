@@ -1,6 +1,7 @@
 import "dart:math";
 
 import "package:carousel_slider/carousel_slider.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import "package:prototype/ui/component/bottom_navbar/bottom_navbar.dart";
@@ -49,12 +50,52 @@ class _HomePageState extends State<HomePage> {
       color: theme.colorScheme.background,
       child: Column(
         children: [
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  TextButton.icon(
+                    onPressed: () {}, 
+                    icon: Icon(
+                      Icons.location_pin,
+                    ),
+                    label: Text(
+                      "香港",
+                      style: theme.textTheme.labelMedium!.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 8,),
+                  Expanded(
+                    child: Text(
+                      "香港中環分店",
+                      style: theme.textTheme.labelMedium,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {}, 
+                    icon: Icon(
+                      CupertinoIcons.location_fill,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {}, 
+                    icon: Icon(
+                      CupertinoIcons.phone_fill,
+                      color: theme.colorScheme.primary,
+                    )
+                  )
+                ],
+              ),
+            ),
+          ),
           CarouselSlider(
             items: images.map<Widget>((img) {
                 return CustomCard(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  width: 600,
-                  height: 400,
+                  margin: const EdgeInsets.symmetric(vertical: 12),
                   child: Image.asset(
                     img,
                     fit: BoxFit.fill,
