@@ -20,11 +20,11 @@ class AppTheme {
           fontWeight: FontWeight.bold,
         ),
         titleLarge: TextStyle(
-          fontSize: 200,
+          fontSize: 26,
           fontWeight: FontWeight.bold,
         ),
         labelMedium: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
         bodySmall: TextStyle(
@@ -35,6 +35,10 @@ class AppTheme {
           fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
+        bodyMedium: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        )
       ),
       colorScheme: const ColorScheme.light(
         background: Colors.white,

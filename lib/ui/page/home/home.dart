@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   label: Text(
                     "香港",
-                    style: theme.textTheme.labelMedium!.copyWith(
+                    style: theme.textTheme.bodyMedium!.copyWith(
                       color: theme.colorScheme.primary,
                     ),
                   ),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: Text(
                     "香港中環分店",
-                    style: theme.textTheme.labelMedium,
+                    style: theme.textTheme.bodyMedium,
                   ),
                 ),
                 IconButton(
@@ -129,15 +129,32 @@ class _HomePageState extends State<HomePage> {
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-        vertical: 8,
+        horizontal: 24,
+        vertical: 12,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircularActionButton(
             icon: FontAwesomeIcons.crown,
             label: "會員中心"
-          )
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.ticket,
+            label: "優惠券"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.brush,
+            label: "量身訂做"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.store,
+            label: "積分商店"
+          ),
+          CircularActionButton(
+            icon: FontAwesomeIcons.gift,
+            label: "邀請有女"
+          ),
         ],
       ),
     );
