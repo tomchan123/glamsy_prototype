@@ -41,7 +41,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         ],
       ),
       items: [
-        _navbarItem("首頁", Icons.home, theme),
+        _navbarItem("主頁", Icons.home, theme),
         _navbarItem("預約", Icons.watch_later_outlined, theme),
         _navbarItem("記錄", Icons.receipt_outlined, theme),
         _navbarItem("個人", Icons.person_outline_rounded, theme),
@@ -57,7 +57,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
     return BottomNavigationBarItem(
       label: label,
       icon: Icon(icon),
-      activeIcon: Icon(icon)
     );
   }
 
