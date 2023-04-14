@@ -19,10 +19,14 @@ class CustomCard extends StatelessWidget {
   double? width;
   double? height;
   bool enableShadow;
+  BoxConstraints? constraints;
+  BlendMode? backgroundBlendMode;
 
   CustomCard({ 
     Key? key,
     this.margin,
+    this.constraints,
+    this.backgroundBlendMode,
     this.width,
     this.height,
     this.enableShadow = true,
@@ -35,10 +39,12 @@ class CustomCard extends StatelessWidget {
     var theme = Theme.of(context);
 
     return Container(
-      width: 600,
-      height: 400,
+      constraints: constraints,
+      width: width,
+      height: height,
       margin: margin,
       decoration: BoxDecoration(
+        backgroundBlendMode: backgroundBlendMode,
         borderRadius: BorderRadius.circular(16),
         boxShadow: !enableShadow
           ? null

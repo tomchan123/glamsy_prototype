@@ -10,7 +10,6 @@ const FloatingMenu({ Key? key }) : super(key: key);
     return Container(
       height: 35,
       width: 90,
-      padding: EdgeInsets.all(4),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey.shade200.withOpacity(1),
@@ -20,25 +19,42 @@ const FloatingMenu({ Key? key }) : super(key: key);
         borderRadius: BorderRadius.circular(18),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _menuButton(Icons.more_horiz),
-          VerticalDivider(
-            width: 4,
+          Expanded(
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(18),
+                bottomLeft: Radius.circular(18),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Icon(
+                  Icons.more_horiz,
+                ),
+              ),
+            ),
           ),
-          _menuButton(Icons.gps_fixed),
+          VerticalDivider(
+            width: 2,
+          ),
+          Expanded(
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(18),
+                topRight: Radius.circular(18),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Icon(
+                  Icons.gps_fixed,
+                ),
+              ),
+            ),
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget _menuButton(
-    IconData icon,
-  ) {
-    return InkWell(
-      onTap: () {},
-      child: Icon(
-        icon,
       ),
     );
   }

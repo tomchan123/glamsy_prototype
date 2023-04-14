@@ -19,6 +19,10 @@ class AppTheme {
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
+        titleLarge: TextStyle(
+          fontSize: 200,
+          fontWeight: FontWeight.bold,
+        ),
         labelMedium: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -27,8 +31,9 @@ class AppTheme {
       colorScheme: const ColorScheme.light(
         background: Colors.white,
         shadow: Colors.black26,
-        primary: const Color.fromARGB(255, 212,162,94),
+        primary: Color.fromARGB(255, 212,162,94),
         onPrimary: Colors.white,
+        secondary: Color.fromARGB(255, 187, 138, 125),
       ),
       iconTheme: IconThemeData(
         size: 22,
