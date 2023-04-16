@@ -14,7 +14,9 @@ import "package:prototype/ui/component/section/section.dart";
 import "../../component/floating_menu/floating_menu.dart";
 
 class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+  const HomePage({ 
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavbar(),
+      bottomNavigationBar: BottomNavbar(selectedIndex: 0),
       floatingActionButton: const FloatingMenu(),
     );
   }

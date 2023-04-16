@@ -2,21 +2,25 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:prototype/ui/page/booking/booking.dart';
+import 'package:prototype/ui/page/home/home.dart';
 
-class BottomNavbar extends StatefulWidget {
-  const BottomNavbar({ Key? key }) : super(key: key);
+class BottomNavbar extends StatelessWidget {
+  int selectedIndex;
+  final _indexRouteMap = {
+    0: "/",
+    1: "/booking",
+    2: "/history",
+    3: "/profile"
+  };
+
+  BottomNavbar({ 
+    Key? key,
+    required this.selectedIndex,
+  }) : super(key: key);
 
   @override
-  State<BottomNavbar> createState() => _BottomNavbarState();
-}
-
-class _BottomNavbarState extends State<BottomNavbar> {
-  int _selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context){
-    var navigator = Navigator.of(context);
-
+  Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
     const unselectedColor = Color.fromARGB(255, 0xC6, 0xC6, 0xC6);
@@ -24,8 +28,12 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      onTap: _onItemTapped,
-      currentIndex: _selectedIndex,
+      onTap: (i) =>
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          _indexRouteMap[i]!, 
+          (route) => false
+        ),
+      currentIndex: selectedIndex,
       iconSize: 26,
       backgroundColor: const Color.fromARGB(255, 0xF9, 0xF9, 0xF9),
       selectedItemColor: selectedColor,
@@ -58,11 +66,5 @@ class _BottomNavbarState extends State<BottomNavbar> {
       label: label,
       icon: Icon(icon),
     );
-  }
-
-  _onItemTapped(int selectedIndex) {
-    setState(() {
-      _selectedIndex = selectedIndex;
-    });
   }
 }
