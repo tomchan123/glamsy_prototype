@@ -19,19 +19,28 @@ class Section extends StatelessWidget {
 
     return Container(
       color: theme.colorScheme.background,
-      padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _headerTitle(theme, title),
-              Container(child: headerSide),
-            ],
-          ),
-          SizedBox(height: 16,),
+          _header(theme, title, headerSide),
           child,
+        ],
+      ),
+    );
+  }
+
+  Widget _header(
+    ThemeData theme,
+    String title,
+    Widget? headerSide,
+  ) {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _headerTitle(theme, title),
+          Container(child: headerSide),
         ],
       ),
     );

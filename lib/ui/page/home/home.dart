@@ -66,16 +66,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ]
       ), 
-      child: Wrap(
-        runSpacing: 16,
-        spacing: 16,
-        alignment: WrapAlignment.spaceBetween,
-        children: [
-          _staffPhotoTile(theme, "assets/images/staff/staff1.jpg"),
-          _staffPhotoTile(theme, "assets/images/staff/staff2.jpg"),
-          _staffPhotoTile(theme, "assets/images/staff/staff3.jpg"),
-          _staffPhotoTile(theme, "assets/images/staff/staff4.jpg"),
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16)
+          + EdgeInsets.only(bottom: 16),
+        child: Wrap(
+          runSpacing: 16,
+          spacing: 16,
+          alignment: WrapAlignment.spaceBetween,
+          children: [
+            _staffPhotoTile(theme, "assets/images/staff/staff1.jpg"),
+            _staffPhotoTile(theme, "assets/images/staff/staff2.jpg"),
+            _staffPhotoTile(theme, "assets/images/staff/staff3.jpg"),
+            _staffPhotoTile(theme, "assets/images/staff/staff4.jpg"),
+          ],
+        ),
       )
     );
   }
