@@ -16,11 +16,11 @@ class AppTheme {
           fontSize: 14,
         ),
         titleMedium: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
         titleLarge: TextStyle(
-          fontSize: 26,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
         labelMedium: TextStyle(
@@ -51,6 +51,7 @@ class AppTheme {
         size: 22,
         weight: 600,
       ),
+      hintColor: Color(0xff9e9e9e),
     );
   }
 }

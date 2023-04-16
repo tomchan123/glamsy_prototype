@@ -9,6 +9,7 @@ import "package:prototype/ui/component/bottom_navbar/bottom_navbar.dart";
 import "package:prototype/ui/component/bouncing/bouncing.dart";
 import "package:prototype/ui/component/circular_action_button/circular_action_button.dart";
 import "package:prototype/ui/component/custom_card/custom_card.dart";
+import "package:prototype/ui/component/section/section.dart";
 
 import "../../component/floating_menu/floating_menu.dart";
 
@@ -28,18 +29,73 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           "主頁",
-          style: theme.textTheme.titleMedium,
+          style: theme.textTheme.titleLarge,
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             _landingArea(theme),
+            SizedBox(height: 16,),
+            _staffInfoSection(theme),
           ],
         ),
       ),
       bottomNavigationBar: const BottomNavbar(),
       floatingActionButton: const FloatingMenu(),
+    );
+  }
+
+  Widget _staffInfoSection(
+    ThemeData theme,
+  ) {
+    return Section(
+      title: "推薦美容師",
+      headerSide: Row(
+        children: [
+          Text(
+            "更多",
+            style: theme.textTheme.titleSmall!.copyWith(
+              color: theme.hintColor,
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: theme.hintColor,
+            size: 16,
+          ),
+        ]
+      ), 
+      child: Wrap(
+        runSpacing: 16,
+        spacing: 16,
+        alignment: WrapAlignment.spaceBetween,
+        children: [
+          _staffPhotoTile(theme, "assets/images/staff/staff1.jpg"),
+          _staffPhotoTile(theme, "assets/images/staff/staff2.jpg"),
+          _staffPhotoTile(theme, "assets/images/staff/staff3.jpg"),
+          _staffPhotoTile(theme, "assets/images/staff/staff4.jpg"),
+        ],
+      )
+    );
+  }
+
+  Widget _staffPhotoTile(
+    ThemeData theme,
+    String imgDir,
+  ) {
+    return SizedBox(
+      height: 200,
+      width: 190,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            imgDir,
+            fit: BoxFit.cover,
+          )
+        ],
+      ),
     );
   }
 
@@ -219,8 +275,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-
   Widget _largeActionTile(
     ThemeData theme,
   ) {
@@ -234,7 +288,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text(
                 "立即預約",
-                style: theme.textTheme.titleMedium!.copyWith(
+                style: theme.textTheme.titleLarge!.copyWith(
                   color: theme.colorScheme.primary,
                 ),
               ),
@@ -272,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     "美容產品",
-                    style: theme.textTheme.titleMedium!.copyWith(
+                    style: theme.textTheme.titleLarge!.copyWith(
                       color: theme.colorScheme.secondary,
                     ),
                   ),
