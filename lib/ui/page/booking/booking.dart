@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:prototype/core/model/store.dart';
+import 'package:prototype/ui/component/custom_card/custom_card.dart';
 import 'package:prototype/ui/component/section/section.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../component/bottom_navbar/bottom_navbar.dart';
 import '../../component/floating_menu/floating_menu.dart';
@@ -15,13 +19,21 @@ class BookingPage extends StatefulWidget {
   _BookingPageState createState() => _BookingPageState();
 }
 
-class _BookingPageState extends State<BookingPage> {
+class _BookingPageState extends State<BookingPage>
+  with SingleTickerProviderStateMixin {
   Store? _selectedStore;
-  List<Store> _stores = Store.getAllStores();
+  final List<Store> _stores = Store.getAllStores();
+
+  final MapController _mapController = MapController();
 
   bool _isSelectedStore(Store store) =>
     _selectedStore?.equal(store) ?? false;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +65,108 @@ class _BookingPageState extends State<BookingPage> {
   ) {
     return Section(
       title: "門店地圖", 
-      child: Padding(
-        padding: EdgeInsets.all(24),
+      child: Container(
+        height: 300,
+        padding: EdgeInsets.all(16)
+          - EdgeInsets.only(top: 16),
+        child: FlutterMap(
+          mapController: _mapController,
+          options: MapOptions(
+            center: LatLng(22.303228118988343, 114.17179425668809),
+            zoom: 12.3
+          ),
+          nonRotatedChildren: [
+            AttributionWidget(
+              attributionBuilder: (context) =>
+                Container(
+                  color: Colors.white.withOpacity(0.8),
+                  padding: EdgeInsets.all(4),
+                  child: const Text(
+                    "© MapBox",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF0078a8),
+                    ),
+                  ),
+                ),
+            ),
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment.bottomRight
+                    + Alignment(-0.05, -0.3),
+                  child: CustomCard(
+                    width: 34,
+                    backgroundColor: Colors.white,
+                    radius: CustomCardRadius.small,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextButton(
+                          onPressed: () => _mapController.move(
+                            _mapController.center,
+                            _mapController.zoom + 2.0
+                          ), 
+                          child: Text(
+                            "+",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ),
+                        Divider(
+                          height: 2,
+                          indent: 6,
+                          endIndent: 6,
+                        ),
+                        TextButton(
+                          onPressed: () => _mapController.move(
+                            _mapController.center,
+                            _mapController.zoom - 2.0
+                          ), 
+                          child: Text(
+                            "-",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+          children: [
+            TileLayer(
+              urlTemplate: "https://api.mapbox.com/styles/v1/wdcgpapi/clgjkfnk5000401p7e17af6z7/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2RjZ3BhcGkiLCJhIjoiY2xnamtic3RkMTYxcTNsbW9lZXdmNDBhdCJ9.k1RNb__wbw50ElHVnTMNFQ",
+              userAgentPackageName: "com.queenyapp.glamsy",
+            ),
+            MarkerLayer(
+              markers: _stores.map<Marker>((store) {
+                return Marker(
+                  point: store.latlng,
+                  width: 36,
+                  height: 48, 
+                  anchorPos: AnchorPos.align(AnchorAlign.top),
+                  builder: (context) {
+                    return Icon(
+                      Icons.location_on_rounded,
+                      size: 36,
+                      color: theme.colorScheme.primary,
+                    );
+                  }
+                );
+              }).toList(),
+            )
+          ],
+        ),
+        
       )
     );
   }
@@ -115,9 +227,7 @@ class _BookingPageState extends State<BookingPage> {
             : theme.colorScheme.background;
     
           return GestureDetector(
-            onTap: () => setState(() {
-              _selectedStore = store;
-            }),
+            onTap: () => _onStoreTap(store),
             child: Container(
               width: _isSelectedStore(store) ? null : 120,
               margin: EdgeInsets.symmetric(horizontal: 8),
@@ -150,6 +260,13 @@ class _BookingPageState extends State<BookingPage> {
         }).toList(),
       ),
     );
+  }
+
+  void _onStoreTap(Store store) {
+    setState(() {
+      _selectedStore = store;
+    });
+    _mapController.move(store.latlng, 16);
   }
 
   Widget _storeInfo(

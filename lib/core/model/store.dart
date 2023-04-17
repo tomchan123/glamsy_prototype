@@ -1,3 +1,4 @@
+import 'package:latlong2/latlong.dart';
 import 'package:prototype/core/model/store.dart';
 
 class Store {
@@ -5,12 +6,14 @@ class Store {
   String name;
   String address;
   double distance;
+  LatLng latlng;
 
   Store(
     this.id,
     this.name,
     this.address,
     this.distance,
+    this.latlng
   );
 
   bool equal(Store other) {
@@ -19,10 +22,10 @@ class Store {
 
   static List<Store> getAllStores() {
     return [
-      Store(1, "香港中環總店", "中環愛丁堡廣場5號", 45),
-      Store(2, "香港灣仔分店", "灣仔告士打道7號", 830),
-      Store(3, "香港尖沙咀旗艦店", "尖沙咀彌敦道35-79號", 1300),
-      Store(4, "香港長沙灣分店", "九龍長沙灣道833號1樓121-123 號舖", 3500),
+      Store(1, "香港中環總店", "中環愛丁堡廣場 5號", 45, LatLng(22.28236325202399, 114.1616593517559)),
+      Store(2, "香港灣仔分店", "灣仔告士打道 7號", 830, LatLng(22.279786674730488, 114.17305446710051)),
+      Store(3, "香港尖沙咀旗艦店", "尖沙咀彌敦道 35-79號", 1300, LatLng(22.296277706377477, 114.17212079593702)),
+      Store(4, "香港長沙灣分店", "九龍長沙灣道 833號 1樓 121-123號舖", 3500, LatLng(22.34005059754184, 114.15266872477454)),
     ];
   }
 }

@@ -22,6 +22,7 @@ class CustomCard extends StatelessWidget {
   BoxConstraints? constraints;
   BlendMode? backgroundBlendMode;
   DecorationImage? image;
+  Color? backgroundColor;
 
   CustomCard({ 
     Key? key,
@@ -32,6 +33,7 @@ class CustomCard extends StatelessWidget {
     this.height,
     this.enableShadow = true,
     this.radius = CustomCardRadius.medium,
+    this.backgroundColor,
     required this.child,
   }) : super(key: key);
 
@@ -46,8 +48,8 @@ class CustomCard extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         image: image,
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: backgroundColor ?? Colors.white,
+        borderRadius: BorderRadius.circular(radius.value),
         boxShadow: !enableShadow
           ? null
           :[
