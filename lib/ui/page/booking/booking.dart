@@ -26,15 +26,15 @@ class _BookingPageState extends State<BookingPage>
 
   final MapController _mapController = MapController();
 
+  final List<String> _imageDirs = [
+    "assets/images/adverts/advert2.jpg",
+    "assets/images/adverts/advert4.jpg",
+    "assets/images/adverts/advert5.jpg",
+  ];
+
   bool _isSelectedStore(Store store) =>
     _selectedStore?.equal(store) ?? false;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+    
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -52,11 +52,59 @@ class _BookingPageState extends State<BookingPage>
             _selectStoreSection(theme),
             SizedBox(height: 16,),
             _storeMapSection(theme),
+            SizedBox(height: 16,),
+            _storePhotoSection(theme),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavbar(selectedIndex: 1),
       floatingActionButton: const FloatingMenu(),
+    );
+  }
+
+  Widget _storePhotoSection(
+    ThemeData theme,
+  ) {
+    return Section(
+      title: "門店照片", 
+      headerSide: Text(
+        "營業時間: 10:00 - 22:00",
+        style: theme.textTheme.titleSmall!.copyWith(
+          color: theme.hintColor,
+        ),
+      ),
+      child: _storePhotoList(theme, _imageDirs),
+    );
+  }
+
+  Widget _storePhotoList(
+    ThemeData theme,
+    List<String> imageDirs,
+  ) {
+    return SizedBox(
+      height: 190,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.only(bottom: 16,),
+        children: imageDirs.map<Widget>(
+          (imageDir) => _storePhotoTile(theme, imageDir)
+        ).toList(),
+      ),
+    );
+  }
+
+  Widget _storePhotoTile(
+    ThemeData theme,
+    String imageDir
+  ) {    
+    return Container(
+      width: 180,
+      height: 100,
+      margin: EdgeInsets.only(left: 16),
+      child: Image.asset(
+        imageDir,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -230,7 +278,7 @@ class _BookingPageState extends State<BookingPage>
             onTap: () => _onStoreTap(store),
             child: Container(
               width: _isSelectedStore(store) ? null : 120,
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.only(left: 16),
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: containerColor,
