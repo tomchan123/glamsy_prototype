@@ -32,9 +32,39 @@ class _BookingPageState extends State<BookingPage>
     "assets/images/adverts/advert5.jpg",
   ];
 
+  PersistentBottomSheetController? _bottomSheetController;
+
   bool _isSelectedStore(Store store) =>
     _selectedStore?.equal(store) ?? false;
-    
+
+  void _onStoreTap(
+    Store store,
+    BuildContext context,
+  ) {
+    setState(() {
+      _selectedStore = store;
+    });
+    _mapController.move(store.latlng, 16);
+
+    var theme = Theme.of(context);
+
+    _bottomSheetController?.close();
+    _bottomSheetController = Scaffold.of(context).showBottomSheet(
+      (context) => _bookStaffBottomSheet(theme, store),
+      elevation: 16,
+      enableDrag: true,
+      backgroundColor: theme.colorScheme.background,
+    );
+  }
+
+  void _navigateToBookStaff(
+    BuildContext context
+  ) {
+    Navigator.of(context).pushNamed(
+      "/book-staff"
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -46,19 +76,66 @@ class _BookingPageState extends State<BookingPage>
           style: theme.textTheme.titleLarge,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _selectStoreSection(theme),
-            SizedBox(height: 16,),
-            _storeMapSection(theme),
-            SizedBox(height: 16,),
-            _storePhotoSection(theme),
-          ],
-        ),
+      body: Builder(
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                _selectStoreSection(theme, context),
+                SizedBox(height: 16,),
+                _storeMapSection(theme),
+                SizedBox(height: 16,),
+                _storePhotoSection(theme),
+              ],
+            ),
+          );
+        }
       ),
       bottomNavigationBar: BottomNavbar(selectedIndex: 1),
       floatingActionButton: const FloatingMenu(),
+    );
+  }
+
+  Widget _bookStaffBottomSheet(
+    ThemeData theme,
+    Store store,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      height: 100,
+      child: SizedBox.expand(
+        child: FilledButton(
+          onPressed: () => _navigateToBookStaff(context),
+          style: FilledButton.styleFrom(
+            alignment: Alignment.center,
+            backgroundColor: theme.colorScheme.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "去預約美容師",
+                style: TextStyle(
+                  fontSize: 18,
+                  letterSpacing: 4,
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                "(${store.name})",
+                style: theme.textTheme.labelSmall!.copyWith(
+                  color: theme.colorScheme.onPrimary.withOpacity(0.8),
+                ),
+              )
+            ]
+          ),
+        ),
+      ),
     );
   }
 
@@ -221,6 +298,7 @@ class _BookingPageState extends State<BookingPage>
 
   Widget _selectStoreSection(
     ThemeData theme,
+    BuildContext context,
   ) {
     return Section(
       headerSide: Row(
@@ -242,7 +320,7 @@ class _BookingPageState extends State<BookingPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _storeList(theme),
+          _storeList(theme, context),
           _storeInfo(theme),
         ],
       )
@@ -251,6 +329,7 @@ class _BookingPageState extends State<BookingPage>
 
   Widget _storeList(
     ThemeData theme,
+    BuildContext context,
   ) {
     return SizedBox(
       height: 78,
@@ -275,7 +354,7 @@ class _BookingPageState extends State<BookingPage>
             : theme.colorScheme.background;
     
           return GestureDetector(
-            onTap: () => _onStoreTap(store),
+            onTap: () => _onStoreTap(store, context),
             child: Container(
               width: _isSelectedStore(store) ? null : 120,
               margin: EdgeInsets.only(left: 16),
@@ -308,13 +387,6 @@ class _BookingPageState extends State<BookingPage>
         }).toList(),
       ),
     );
-  }
-
-  void _onStoreTap(Store store) {
-    setState(() {
-      _selectedStore = store;
-    });
-    _mapController.move(store.latlng, 16);
   }
 
   Widget _storeInfo(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prototype/ui/page/booking/book_staff.dart';
 import 'package:prototype/ui/page/history/history.dart';
 import 'package:prototype/ui/page/home/home.dart';
 import 'package:prototype/ui/page/profile/profile.dart';
@@ -31,6 +32,11 @@ class _RootState extends State<Root> {
             return PageRouteBuilder(
               pageBuilder: (_, __, ___) => 
                 BookingPage()
+            );
+          case "/book-staff":
+            return MaterialPageRoute(
+              builder: (context) => 
+                BookStaffPage()
             );
           default: 
             return null;
