@@ -22,6 +22,7 @@ class AppTheme {
         titleLarge: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
+          letterSpacing: 1
         ),
         labelMedium: TextStyle(
           fontSize: 14,
@@ -46,6 +47,7 @@ class AppTheme {
         primary: Color.fromARGB(255, 212, 162, 94),
         onPrimary: Colors.white,
         secondary: Color.fromARGB(255, 187, 138, 125),
+        surface: Color(0xfff4f4f4),
       ),
       iconTheme: IconThemeData(
         size: 22,

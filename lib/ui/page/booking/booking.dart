@@ -58,10 +58,12 @@ class _BookingPageState extends State<BookingPage>
   }
 
   void _navigateToBookStaff(
-    BuildContext context
+    BuildContext context,
+    Store store,
   ) {
     Navigator.of(context).pushNamed(
-      "/book-staff"
+      "/book-staff",
+      arguments: store,
     );
   }
 
@@ -105,7 +107,7 @@ class _BookingPageState extends State<BookingPage>
       height: 100,
       child: SizedBox.expand(
         child: FilledButton(
-          onPressed: () => _navigateToBookStaff(context),
+          onPressed: () => _navigateToBookStaff(context, store),
           style: FilledButton.styleFrom(
             alignment: Alignment.center,
             backgroundColor: theme.colorScheme.primary,
@@ -118,7 +120,7 @@ class _BookingPageState extends State<BookingPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "去預約美容師",
+                "立即預約美容師",
                 style: TextStyle(
                   fontSize: 18,
                   letterSpacing: 4,

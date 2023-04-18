@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prototype/core/model/store.dart';
 import 'package:prototype/ui/page/booking/book_staff.dart';
 import 'package:prototype/ui/page/history/history.dart';
 import 'package:prototype/ui/page/home/home.dart';
@@ -36,7 +37,7 @@ class _RootState extends State<Root> {
           case "/book-staff":
             return MaterialPageRoute(
               builder: (context) => 
-                BookStaffPage()
+                BookStaffPage(settings.arguments as Store)
             );
           default: 
             return null;
