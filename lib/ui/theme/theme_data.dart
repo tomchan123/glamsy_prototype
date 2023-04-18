@@ -12,8 +12,8 @@ class AppTheme {
       scaffoldBackgroundColor: const Color.fromARGB(255, 0xF5, 0xF5, 0xF5),
       textTheme: const TextTheme(
         labelSmall: TextStyle(
-          fontWeight: FontWeight.w300,
-          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
         ),
         titleMedium: TextStyle(
           fontSize: 16,

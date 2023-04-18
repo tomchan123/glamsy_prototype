@@ -130,7 +130,7 @@ class _BookingPageState extends State<BookingPage>
               ),
               Text(
                 "(${store.name})",
-                style: theme.textTheme.labelSmall!.copyWith(
+                style: theme.textTheme.bodySmall!.copyWith(
                   color: theme.colorScheme.onPrimary.withOpacity(0.8),
                 ),
               )

@@ -38,8 +38,8 @@ class BottomNavbar extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 0xF9, 0xF9, 0xF9),
       selectedItemColor: selectedColor,
       unselectedItemColor: unselectedColor,
-      selectedLabelStyle: theme.textTheme.labelSmall,
-      unselectedLabelStyle: theme.textTheme.labelSmall,
+      selectedLabelStyle: theme.textTheme.bodySmall,
+      unselectedLabelStyle: theme.textTheme.bodySmall,
       selectedIconTheme: IconThemeData(
         shadows: [
           Shadow(

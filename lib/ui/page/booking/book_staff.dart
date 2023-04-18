@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:prototype/core/model/staff.dart';
 import 'package:prototype/core/model/store.dart';
 import 'package:prototype/ui/component/badged_icon_button/badged_icon_button.dart';
 import 'package:prototype/ui/component/dropdown_chip/dropdown_chip.dart';
 import 'package:prototype/ui/component/floating_menu/floating_menu.dart';
+import 'package:prototype/ui/component/staff_info_card/staff_info_card.dart';
 
 class BookStaffPage extends StatefulWidget {
   final Store store;
@@ -27,15 +29,15 @@ class _BookStaffPageState extends State<BookStaffPage> {
     this.store,
   );
 
+  void _navigateBack(
+    BuildContext context,
+  ) {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context){
     var theme = Theme.of(context);
-
-    void _navigateBack(
-      BuildContext context,
-    ) {
-      Navigator.of(context).pop();
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -54,12 +56,11 @@ class _BookStaffPageState extends State<BookStaffPage> {
       ),
       body: Builder(
         builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                _storeInfoHeader(context, theme)
-              ],
-            ),
+          return Column(
+            children: [
+              _storeInfoHeader(context, theme),
+              Expanded(child: _staffList(context, theme)),
+            ],
           );
         }
       ),
@@ -94,7 +95,7 @@ class _BookStaffPageState extends State<BookStaffPage> {
               icon: Icons.shopping_cart_rounded, 
               count: 2,
             )
-          )
+          ),
         ],
       ),
     );
@@ -132,7 +133,7 @@ class _BookStaffPageState extends State<BookStaffPage> {
                 onPressed: () {}, 
                 icon: Icon(
                   icon,
-                  size: 20,
+                  size: 24,
                   color: theme.colorScheme.primary,
                 ),
               )
@@ -148,13 +149,19 @@ class _BookStaffPageState extends State<BookStaffPage> {
     BuildContext context,
     ThemeData theme,
   ) {
-    return Container();
-  }
+    var staffs = Staff.getAllStaffs();
 
-  Widget _staffInfoTile(
-    BuildContext context,
-    ThemeData theme,
-  ) {
-    return Container();
+    return ListView(
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      children: staffs.map<Widget>((staff) => 
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 12),
+          child: StaffInfoCard(
+            staff: staff,
+          ),
+        )
+      ).toList(),
+    );
   }
 }
