@@ -18,7 +18,7 @@ class StaffInfoCard extends StatefulWidget {
 }
 
 class _StaffInfoCardState extends State<StaffInfoCard> {
-  bool isExpanded = false;
+  bool _isExpanded = false;
 
   String _getTimeAfterMins(int mins) {
     var timeFromMins = DateTime.now().add(Duration(
@@ -28,19 +28,36 @@ class _StaffInfoCardState extends State<StaffInfoCard> {
   }
 
   void _expandBiography() {
-
+    setState(() {
+      _animatedHeight = 258;
+    });
+    setState(() {
+      _isExpanded = true;
+    });
   }
+
+  void _closeBiography() {
+    setState(() {
+      _animatedHeight = 148;
+    });
+    setState(() {
+      _isExpanded = false;
+    });
+  }
+
+  double? _animatedHeight = 148;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 250),
+      height: _animatedHeight,
       padding: EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 16
       ),
-      height: 148,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Color(0xfffefefe),
@@ -117,7 +134,6 @@ class _StaffInfoCardState extends State<StaffInfoCard> {
         ),
         SizedBox(height: 8,),
         _staffRating(context, theme),
-        // SizedBox(height: 8,),
         _staffBiography(context, theme),
       ],
     );
@@ -252,15 +268,51 @@ class _StaffInfoCardState extends State<StaffInfoCard> {
     BuildContext context,
     ThemeData theme,
   ) {
+    if (_isExpanded) {
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.staff.biography,
+              style: theme.textTheme.bodySmall!.copyWith(
+                color: theme.hintColor,
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional.bottomEnd,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.all(4),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: () => _closeBiography(), 
+              child: Text(
+                "縮小詳情",
+                style: theme.textTheme.bodySmall!.copyWith(
+                  color: Color(0xfff6d1b0),
+                ),
+              ),
+            ),
+          )
+        ],
+      );
+    }
+
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(
-            widget.staff.biography,
-            style: theme.textTheme.bodySmall!.copyWith(
-              color: theme.hintColor,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.staff.biography,
+              style: theme.textTheme.bodySmall!.copyWith(
+                color: theme.hintColor,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            overflow: TextOverflow.ellipsis,
           )
         ),
         TextButton(
