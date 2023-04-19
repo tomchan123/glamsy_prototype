@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage> {
             label: "量身訂做"
           ),
           CircularActionButton(
-            icon: FontAwesomeIcons.store,
+            icon: FontAwesomeIcons.spa,
             label: "積分商店"
           ),
           CircularActionButton(

@@ -39,14 +39,18 @@ class AppTheme {
         bodyMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
+        ),
+        labelLarge: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
         )
       ),
       colorScheme: const ColorScheme.light(
         background: Colors.white,
         shadow: Colors.black12,
-        primary: Color.fromARGB(255, 212, 162, 94),
+        primary: Color(0xffd4a25e),
         onPrimary: Colors.white,
-        secondary: Color.fromARGB(255, 187, 138, 125),
+        secondary: Color(0xffbb8a7d),
         surface: Color(0xfff4f4f4),
       ),
       iconTheme: IconThemeData(

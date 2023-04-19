@@ -39,6 +39,11 @@ class _RootState extends State<Root> {
               builder: (context) => 
                 BookStaffPage(settings.arguments as Store)
             );
+          case "/history":
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => 
+                HistoryPage()
+            );
           default: 
             return null;
         }
