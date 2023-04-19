@@ -43,6 +43,11 @@ class AppTheme {
         labelLarge: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w500,
+        ),
+        displayMedium: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         )
       ),
       colorScheme: const ColorScheme.light(
@@ -51,7 +56,7 @@ class AppTheme {
         primary: Color(0xffd4a25e),
         onPrimary: Colors.white,
         secondary: Color(0xffbb8a7d),
-        surface: Color(0xfff4f4f4),
+        surface: Color(0xfff1f1f1),
       ),
       iconTheme: IconThemeData(
         size: 22,

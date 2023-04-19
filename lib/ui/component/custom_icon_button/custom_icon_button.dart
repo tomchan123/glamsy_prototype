@@ -5,9 +5,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CustomIconButton extends StatelessWidget {
   String name;
   IconData icon;
+  double gap;
+  double iconSize;
+  Color? textColor;
 
   CustomIconButton({ 
     Key? key,
+    this.gap = 8,
+    this.iconSize = 30,
+    this.textColor,
     required this.name,
     required this.icon, 
   }) : super(key: key);
@@ -15,6 +21,8 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     var theme = Theme.of(context);
+
+    textColor = textColor ?? theme.hintColor;
 
     return GestureDetector(
       onTap: () {},
@@ -34,14 +42,14 @@ class CustomIconButton extends StatelessWidget {
             blendMode: BlendMode.srcIn,
             child: FaIcon(
               icon,
-              size: 30,
+              size: iconSize,
             ),
           ),
-          SizedBox(height: 8,),
+          SizedBox(height: gap,),
           Text(
             name,
             style: theme.textTheme.labelLarge!.copyWith(
-              color: theme.hintColor,
+              color: textColor,
             ),
           ),
         ],

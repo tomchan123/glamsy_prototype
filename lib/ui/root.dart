@@ -44,6 +44,11 @@ class _RootState extends State<Root> {
               pageBuilder: (_, __, ___) => 
                 HistoryPage()
             );
+          case "/profile":
+            return PageRouteBuilder(
+              pageBuilder: (_, __, ___) => 
+                ProfilePage()
+            );
           default: 
             return null;
         }
