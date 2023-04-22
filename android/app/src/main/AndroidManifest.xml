@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.glamsy_prototype">
+    package="com.example.prototype">
    <application
-        android:label="glamsy_prototype"
+        android:label="prototype"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
