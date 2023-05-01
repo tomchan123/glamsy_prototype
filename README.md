@@ -1,6 +1,6 @@
-# glamsy_prototype
+# UI Prototype
 
-A new Flutter project.
+A list of ui prototypes that i made
 
 ## Getting Started
 
